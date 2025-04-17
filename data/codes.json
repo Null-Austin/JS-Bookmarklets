@@ -4,12 +4,14 @@
         {
             "title":"basic alert",
             "code":"alert(321)",
-            "trusted":true
+            "trusted":true,
+            "Author":"Null-Austin"
         },
         {
             "title":"Pink background 😎",
             "code":"document.body.style.background = 'pink';",
-            "trusted":false
+            "trusted":false,
+            "Author":"some_random_user"
         }
     ]
 }
