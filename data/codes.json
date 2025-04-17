@@ -3,12 +3,13 @@
     "code":[
         {
             "title":"basic alert",
-            "code":"alert(321)"
+            "code":"alert(321)",
+            "trusted":true
         },
         {
             "title":"Pink background 😎",
-            "code":"document.body.style.background = 'pink';"
+            "code":"document.body.style.background = 'pink';",
+            "trusted":false
         }
     ]
 }
-  
