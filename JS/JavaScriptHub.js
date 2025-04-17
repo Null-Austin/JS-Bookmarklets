@@ -38,16 +38,28 @@ const child = window.open('about:blank','_blank',`
             div.classList.add('option');
             
             const span = document.createElement('span');
-            span.innerText = data['text'];
+            span.innerText = `${data['text']}`;
+
+            span.appendChild(document.createElement('br'))
+
+            const span2 = document.createElement('span')
+            span2.innerHTML = `${data['author']}`
+            span2.style.color = 'blue'
+            span2.style.textDecoration = 'underline'
+            span2.style.cursor = 'pointer'
+            span2.addEventListener('click',(e)=>{
+                window.open(`https://github.com/${data['author']}`,'_blank','popup')
+            })
 
             const button = document.createElement('button');
             button.innerText = 'RUN';
 
-            //just make sure we save the code with the div. i hope no one finds xss :( anyways, im the only one who can edit the code, so yeah, were safe. i hope.
+            //just make sure we save the code with the div. i hope no one finds xss :( anyways, im was only one who can edit the code, so yeah, were safe. i hope. just run the verified green code
             div.dataset.code = data['code']
 
             //glue up
             div.appendChild(span);
+            div.appendChild(span2)
             div.appendChild(button);
 
             //get that last piece to stick
@@ -88,8 +100,11 @@ const child = window.open('about:blank','_blank',`
     ChildFunctions.setup();
 
     for (const i of code){
-        ChildFunctions.addOn({"text":i['title'],"code":i['code'],"trust":i['trusted']});
+        ChildFunctions.addOn({"text":i['title'],"code":i['code'],"trust":i['trusted'],"author":i['Author']});
     }
+
+    //if you see this, your cool btw.
+
 
 
 }
