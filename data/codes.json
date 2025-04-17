@@ -1,9 +1,14 @@
 {
-  "_comment":"Hey, this is comment, this is not a very good comment, but JSON is limited to data only, so yeah anyways, a fair hint, is that this is not js code, this is extra code for any of my other projects such as JShub! so yeah. Cheers!",
-	"code":[
-		{
-			"title":"basic alert",
-			"code":"alert(321)"
-		}
-	]
+    "_comment":"Hey, this is comment, this is not a very good comment, but JSON is limited to data only, so yeah anyways, a fair hint, is that this is not js code, this is extra code for any of my other projects such as JShub! so yeah. Cheers!",
+    "code":[
+        {
+            "title":"basic alert",
+            "code":"alert(321)"
+        },
+        {
+            "title":"Pink background 😎",
+            "code":"document.body.style.background = 'pink';"
+        }
+    ]
 }
+  
