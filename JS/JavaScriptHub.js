@@ -1,7 +1,7 @@
 const run = async function(){ //dont mind me pretty much prolly breaking every rule of web development >:(... P.S. sorry MDN.
 
-//opens up a new child
-const child = window.open('about:blank','_blank',`
+    //opens up a new child
+    const child = window.open('about:blank','_blank',`
         width=600,
         height=600,
         top=100,
@@ -22,9 +22,10 @@ const child = window.open('about:blank','_blank',`
         writeHead = (data)=>{
             child.document.head.innerHTML = data;
         }
-        setup = ()=>{
-            this.writeHead('<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>JS Hub</title> <style> @import url(\'https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap\'); body,html{ width: 100%; height: 100%; } .option{ width: 90%; margin: 0 auto; background-color: white; border: 1px solid rgb(141, 141, 141); border-radius: 15px; display: flex; justify-content: space-between; padding: 15px; } .option>span{ font-family: "National Park", sans-serif; font-optical-sizing: auto; font-weight: 400; font-style: normal; } .option>button{ border-radius: 50%; width: 45px; height: 45px; text-align: center; background-color: rgb(255, 255, 255); border: 1px solid rgb(205, 205, 205); cursor: pointer; transition: .25s; } .option>button:hover{ background-color: rgb(214, 214, 214); transition: 1s; } </style>');
-            this.writeBody('');
+        setup = async ()=>{
+            var data = await fetch('https://raw.githubusercontent.com/Null-Austin/Javascript-web-code/refs/heads/main/data/JSHUB.html');
+            var text = await data.text();
+            child.document.write(text)
         }
         readBody = ()=>{
             return child.body.innerHTML;
@@ -35,6 +36,11 @@ const child = window.open('about:blank','_blank',`
 
             //basic element creation
             const div = document.createElement('div');
+            if (data['trust']){
+                div.dataset.trusted = 'true'
+            }else{
+                div.dataset.trusted = 'false'
+            }
             div.classList.add('option');
             
             const span = document.createElement('span');
@@ -82,6 +88,9 @@ const child = window.open('about:blank','_blank',`
             if (data['trust'] === true){
                 span.style.color = 'green'
                 span.innerText = `[✓] ${span.innerText}`
+                //span.title = 'The "[✓]" means that this code was written by the author of this project.'
+                span.classList.add('tooltip')
+                span.dataset.tooltip = 'The "[✓]" means that this code was written by the author of this project.'
             }
         }
     }
@@ -97,7 +106,7 @@ const child = window.open('about:blank','_blank',`
     var code = json['code'];
 
     //time for the real action :O
-    ChildFunctions.setup();
+    await ChildFunctions.setup();
 
     for (const i of code){
         ChildFunctions.addOn({"text":i['title'],"code":i['code'],"trust":i['trusted'],"author":i['Author']});
@@ -105,7 +114,62 @@ const child = window.open('about:blank','_blank',`
 
     //if you see this, your cool btw.
 
-
-
+    mouseTracker = (child)=>{
+        console.log('mouse tracker')
+    
+    
+        //Just some management for the mouse
+        class mouseManager {
+            constructor(){
+                this.mousex = 0
+                this.mousey = 0
+            }
+            setMouse = (e)=>{
+                this.mousex = e.clientX
+                this.mousey = e.clientY
+            }
+            getMouse = (e)=>{
+                return [this.mousex,this.mousey]
+            }
+        }
+        var mouse = new mouseManager
+    
+        // more indepth mouse management and mouse tracking :D
+        child.document.addEventListener('mousemove',(e)=>{
+            //just to give data to the stealers >:)
+            mouse.setMouse(e)
+            //nah, just joking
+            var mousedata = mouse.getMouse()
+            div.style.left = (mousedata[0])+'px'
+            div.style.top = (mousedata[1]-div.offsetHeight)+'px'
+        })
+    
+        //creating the tool tip
+        const div = document.createElement('div')
+        div.style.display = 'none'
+        div.style.position = 'absolute'
+        div.style.background = 'rgba(0, 0, 0, 0.8)'
+        div.style.left = '20px'
+        div.style.top = '20px'
+        div.style.color = 'white'
+        div.style.padding = '2px'
+        
+        div.innerText = 'weird you see this? this tooltip is impossible to see regularly?... HACKER!!!' //just some dumb code lol.
+    
+        child.document.body.appendChild(div)
+    
+        for (const tip of child.document.getElementsByClassName('tooltip')){
+            tip.addEventListener('mouseenter',(e)=>{
+                div.style.display = 'block'
+                div.innerText = tip.dataset.tooltip
+            })
+            tip.addEventListener('mouseleave',(e)=>{
+                div.style.display = 'none'
+            })
+        }
+    }
+    mouseTracker(child)
 }
 await run();
+//its 9 P.M. you have been holding me for a week... please let me go back to my family...
+//Never.
