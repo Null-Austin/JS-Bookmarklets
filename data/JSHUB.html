@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>JSHUB</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap');
         body,html{
@@ -13,7 +13,6 @@
         .option{
             width: 90%;
             margin: 0 auto;
-            background-color: white;
             border: 1px solid rgb(141, 141, 141);
             border-radius: 15px;
             display: flex;
@@ -21,6 +20,7 @@
             justify-content: space-between;
         
             padding: 15px;
+            transition: .1s;
         }
         .option>span{
             font-family: "National Park", sans-serif;
@@ -38,9 +38,20 @@
             cursor: pointer;
             transition: .25s;
         }
+        .option:hover{
+            background-color: rgb(255, 211, 211);
+            transition: .1s;
+        }
         .option>button:hover{
             background-color: rgb(214, 214, 214);
             transition: 1s;
+        }
+        .option[data-trusted='true']{
+            /*background-color: rgb(124, 255, 124);*/
+        }
+        .option[data-trusted='true']:hover{
+            transition: .1s;
+            background-color: rgb(215, 255, 205);
         }
     </style>
 </head>
