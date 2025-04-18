@@ -3,14 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSHUB</title>
+    <title>Document</title>
     <style>
+        html>*>*:not(head){
+            transition: .3s;
+        }
+        span{
+            font-family: "National Park", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal; 
+        }
         @import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap');
         body,html{
             width: 100%;
             height: 100%;
         }
+        body{
+            background-color: rgb(240, 240, 240);
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+        body.dark{
+            background-color: rgb(8, 8, 8);
+            color: rgb(228, 228, 228);
+
+        }
         .option{
+            background-color: white;
             width: 90%;
             margin: 0 auto;
             border: 1px solid rgb(141, 141, 141);
@@ -18,15 +39,35 @@
             display: flex;
 
             justify-content: space-between;
-        
+            
             padding: 15px;
-            transition: .1s;
+            margin-bottom: 3px;
         }
-        .option>span{
-            font-family: "National Park", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
+        body.dark>.option{
+            background-color: rgb(20, 20, 20);
+            border: 1px solid rgb(18, 18, 18);
+            color: rgb(214, 214, 214);
+            border: 1px solid rgb(59, 59, 59);
+        }
+        div#themeswitch>div.circle{
+            cursor: pointer;
+            background-color: rgb(0, 0, 0);
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            float: left;
+        }
+        #themeswitch{
+            width: 50px;
+            height: 20px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 15px;
+            right: 2.5%;
+        }
+        div#themeswitch>div.circle.dark{
+            background-color: rgb(58, 58, 58);
+            transform: translateX(30px);
         }
         .option>button{
             border-radius: 50%;
@@ -36,25 +77,44 @@
             background-color: rgb(255, 255, 255);
             border: 1px solid rgb(205, 205, 205);
             cursor: pointer;
-            transition: .25s;
         }
-        .option:hover{
-            background-color: rgb(255, 211, 211);
-            transition: .1s;
+        body.dark>.option>button{
+            background-color: rgb(34, 34, 34);
+            border: 1px solid rgb(49, 49, 49);
+            color: white;
         }
-        .option>button:hover{
-            background-color: rgb(214, 214, 214);
-            transition: 1s;
+        button:hover{
+            background-color: rgb(192, 192, 192);
         }
-        .option[data-trusted='true']{
-            /*background-color: rgb(124, 255, 124);*/
+        body.dark>.option{
+            button:hover{
+                background-color: rgb(48, 48, 48);
+            }
         }
-        .option[data-trusted='true']:hover{
-            transition: .1s;
-            background-color: rgb(215, 255, 205);
+        body>.option:hover{
+            background-color: rgb(255, 221, 221);
+        }
+        body.dark>.option:hover{
+            background-color: rgb(49, 0, 0);
+        }
+        body.dark>.option[data-trusted='true']:hover{
+            background-color: rgb(0, 35, 0);
+        }
+        body>.option[data-trusted='true']:hover{
+            background-color: rgb(210, 255, 210);
         }
     </style>
+    <script>
+        function toggleDarkMode(){
+            document.body.classList.toggle('dark')
+            document.querySelector('div#themeswitch>div.circle').classList.toggle('dark')
+        }
+        toggleDarkMode()
+    </script>
 </head>
-<body>
+<body class="light">
+    <div data-trusted="false" class="option" data-code="document.body.style.background = 'pink';"><span style="color: red;">Pink background 😎<br></span><span style="color: blue; text-decoration: underline; cursor: pointer;">some_random_user</span><button>RUN</button></div>
+    <div data-trusted="false" class="option" data-code="document.body.style.background = 'pink';"><span style="color: red;">Pink background 😎<br></span><span style="color: blue; text-decoration: underline; cursor: pointer;">some_random_user</span><button>RUN</button></div>
+<footer><div id="themeswitch" onclick="toggleDarkMode()"><div class="circle""></div></div></footer>
 </body>
 </html>
